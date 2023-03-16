@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+<body>
+    <div class="iframe-container">
+        <h1>Your video will appear here</h1>
+        <p>
+            This project is configured to work with portrait videos. 
+            For best results, please use a camera that produces matching output
+            and good resolution. Please make sure that your sceen is at least 1300px wide,
+            otherwise the contents of the game get shifted and it becomes unplayable.
+        </p>
+        <p>
+            None of the videos are recorded and none of your personal information
+            will be stored if you use this website. The video is used to extract
+            126 keypoints representing your hands, which are stored as a numpy array.
+            They are destroyed when you exit or reload the website.
+        </p>
+        <h3>How to play</h3>
+        <p>
+            Use gestures to control where PacMan goes next. Move around
+            to eat all the dots on the map. When you eat all the dots,
+            you win. Don't get caught by
+            the ghosts which randomly move around the map - if they catch you, 
+            you lose. After eating a power-up (the large dots), you can eat 
+            the ghosts 10 seconds and gain extra points.
+        </p>
+        <p>
+            When you click the start game button below,
+            your video will turn on. Use gestures that are shown on the right
+            of the game to control PacMan. The gestures are evalated with
+            a deep learning LSTM model. You will see a feed on top of the 
+            frame showing the last few predicted gestures, along with visual
+            representation of how confident the model is that you are 
+            showing each of the gestures.
+        </p>
+        <p>
+            If you don't want to play yourself but still want to see how it
+            works, click the link at the top of the page to watch a video 
+            of me playing.
+        </p>
+    </div>
+</body>
+</html>

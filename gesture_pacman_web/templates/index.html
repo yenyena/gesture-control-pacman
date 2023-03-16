@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename= 'js/pacman.js') }}" charset="utf-8"></script>
+
+    <title>Gesture Pac-Man</title>
+</head>
+<body>
+    <div class="start-container">
+        <h1>Use your hands to play Pac-Man!</h1>
+        <div class="subheading">
+            <div class="subheading-yt">
+                <a class='link' href='https://youtu.be/Qi7aKc1FjsI'>
+                    <img class="logo" src="../static/yt_icon_mono_dark.png">
+                    <span>Gameplay video</span>
+                </a>
+            </div>
+            <div class="subheading-github">
+                <a class='link' href='/'>
+                    <img class="logo" src="../static/github-mark-white.png">
+                    <span>github.com/yenyena/gesture-pacman</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mid-container">
+        <!-- <iframe src="{{ url_for('video_feed') }}" width="360" height="640"></iframe> -->
+        <iframe id='video' src="{{ url_for('video_off') }}" width="360" height="640"></iframe>
+        <div class="pacman-grid"></div>
+        <div class="tut-score">
+            <div class="tut">
+                <div class="guide-img">
+                    <img src="{{ url_for('static', filename='left.png') }}" max-width='120' height='190' alt="left gesture">
+                    <figcaption>Go left</figcaption>
+                </div>
+
+                <div class="guide-img">
+                    <img src="{{ url_for('static', filename='right.png') }}" max-width='120' height='190' alt="right gesture">
+                    <figcaption>Go right</figcaption>
+                </div>
+
+                <div class="guide-img">
+                    <img src="{{ url_for('static', filename='up.png') }}" max-width='120' height='190' alt="up gesture">
+                    <figcaption>Go up</figcaption>
+                </div>
+
+                <div class="guide-img">
+                    <img src="{{ url_for('static', filename='down.png') }}" max-width='120' height='190' alt="down gesture">
+                    <figcaption>Go down</figcaption>
+                </div>
+            </div>
+
+            <h3 class="score-display">Score: <span id="score">0</span></h3>
+        </div>
+    </div>
+    <div class="end-container">
+        <button id="toggleGame">START GAME</button>
+    </div>
+
+    <script>
+        var predictions = '{{ prediction }}'
+        var video_url = "{{ url_for('video_feed') }}"
+        var no_video_url = "{{ url_for('video_off') }}"
+        console.log('Predictions: ' + predictions)
+    </script>
+</body>
+</html>
