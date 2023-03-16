@@ -1,6 +1,6 @@
 # Gesture-controlled Pac-Man
 
-A simple gesture recognition CNN for controlling Pac-Man.
+A gesture recognition CNN for controlling Pac-Man.
 
 Watch a demo: https://www.youtube.com/watch?v=Qi7aKc1FjsI
 
