@@ -32,5 +32,6 @@ To run this project, navigate to the /gesture_pacman_web, install dependencies f
 ```
 $ cd ../gesture_pacman_web
 $ pip install -r requirements.txt
+$ pip install python-dotenv
 $ flask run
 ```
