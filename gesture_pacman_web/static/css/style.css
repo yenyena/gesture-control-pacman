@@ -128,8 +128,8 @@ h1 {
 /* accent color: #524DD1 */
 
 .iframe-container {
-    width: 345px;
-    height: 630px;
+    width: 285px;
+    height: 520px;
     padding: 10px;
     text-align: justify;
     text-align-last: center;
@@ -245,6 +245,15 @@ h1 {
     height: 20px !important;
     margin: 0 !important;
     z-index: 100;
+}
+
+.camera-div {
+    display: flex;
+    flex-direction: column;
+}
+#camera-selector {
+    margin-bottom: 1em;
+    padding: 0.1em 0.3em;
 }
 
 @media screen and (max-width: 1295px) {

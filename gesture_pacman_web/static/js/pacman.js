@@ -5,6 +5,7 @@ let intersection = true;
 let prediction = '';
 let currentDir = '';
 let checkFor = '';
+let gameRunning = ''
 
 function updatePrediction() {
     $.get("/get_prediction", function(data) {
@@ -284,6 +285,31 @@ jQuery( document ).ready(function($) {
     const pacmanSpeed = 500;
     let isGameRunning = false;
     let getPredictionInterval;
+
+    $.getJSON("/get_cameras", function (data) {
+        $.each(data, function (index, value) {
+            $('#camera-selector').append($('<option>', { value: value, text: 'Camera ' + value }));
+        });
+    });
+
+    var csrf_token = "{{ csrf_token() }}";
+    $("#camera-selector").change(function () {
+        var camera_id = $("#camera-selector").val();
+        $.ajax({
+          url: "/set_camera",
+          type: "POST",
+          data: { "camera_id": camera_id, "csrf_token": csrf_token },
+          success: function (response) {
+            console.log(response);
+            if (isGameRunning) {
+                startVideo()
+            }
+          },
+          error: function (error) {
+            console.log("Error setting the camera ID");
+          }
+        });
+    });
 
     /* 
     Grid legend classes: 

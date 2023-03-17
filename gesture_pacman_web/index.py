@@ -1,10 +1,17 @@
-from flask import Flask, render_template, Response, jsonify
+from flask import Flask, render_template, Response, jsonify, request, session
+from dotenv import load_dotenv
+from flask_wtf.csrf import CSRFProtect
+import os
+import logging
 import cv2
 import tensorflow as tf
 import mediapipe as mp
 import numpy as np
 
+load_dotenv()
+
 app = Flask(__name__)
+app.secret_key = os.environ['SECRET_KEY']
 
 prediction = 'none'
 
@@ -88,11 +95,27 @@ def prob_viz(res, actions, input_frame, colors):
         
     return output_frame
 
+def detect_cameras(max_cameras=10):
+    cameras = []
+    for camera_id in range(max_cameras):
+        cap = cv2.VideoCapture(camera_id)
+        if cap is None or not cap.isOpened():
+            cap.release()
+        else:
+            cameras.append(camera_id)
+            cap.release()
+    return cameras
+
 history = []
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/get_cameras', methods=['GET'])
+def get_cameras():
+    available_cameras = detect_cameras()
+    return jsonify(available_cameras)
 
 @app.route('/video_off')
 def video_off():
@@ -103,9 +126,19 @@ def get_prediction():
     global prediction
     return jsonify(prediction=prediction)
 
+@app.route('/set_camera', methods=['POST'])
+def set_camera():
+    camera_id = int(request.form.get('camera_id'))
+    session["camera_id"] = camera_id
+    return "Camera ID set successfully", 200
+
 @app.route('/video_feed')
 def video_feed():
-    capture = cv2.VideoCapture(0)
+    camera_id = session.get("camera_id", None)
+    if camera_id is not None:
+        capture = cv2.VideoCapture(camera_id)
+    else:
+        capture = cv2.VideoCapture(0)
 
     def get_video_feed():
         # make detection variables
@@ -152,7 +185,7 @@ def video_feed():
                 cv2.putText(image, ' '.join(history), (25, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
 
                 # show the video in frame
-                image = cv2.resize(image, (360, 640))
+                image = cv2.resize(image, (300, 533))
                 ret, jpeg = cv2.imencode('.jpg', image)
 
                 yield (b'--frame\r\n'
