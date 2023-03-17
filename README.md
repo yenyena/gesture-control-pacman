@@ -1,6 +1,6 @@
 # Gesture-controlled Pac-Man
 
-A simple gesture recognition CNN for controlling Pac-Man.
+A gesture recognition CNN for controlling Pac-Man.
 
 Watch a demo: https://www.youtube.com/watch?v=Qi7aKc1FjsI
 
@@ -32,5 +32,6 @@ To run this project, navigate to the /gesture_pacman_web, install dependencies f
 ```
 $ cd ../gesture_pacman_web
 $ pip install -r requirements.txt
+$ pip install python-dotenv
 $ flask run
 ```
