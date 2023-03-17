@@ -23,15 +23,17 @@ Accompanying website:
 * NumPy version 1.23.5
 * CV2 version 4.7.0.68
 * TensorFlow version 2.10.0
+* Flask-WTF version 1.1.1
+* python-dotenv version 1.0.0 
 * HTML/CSS/JavaScript
 
 
 ## Setup
-To run this project, navigate to the /gesture_pacman_web, install dependencies from requirements.txt and flask run.
+To run this project, navigate to the /gesture_pacman_web, install dependencies from requirements.txt, create a secret key in a .env file and run the index.py file.
 
 ```
 $ cd ../gesture_pacman_web
 $ pip install -r requirements.txt
-$ pip install python-dotenv
-$ flask run
+$ for /f %i in ('python -c "import secrets; print(secrets.token_hex(32))"') do set SECRET_KEY=%i && echo SECRET_KEY=%SECRET_KEY% > .env
+$ python index.py
 ```
