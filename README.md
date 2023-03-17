@@ -34,6 +34,7 @@ To run this project, navigate to the /gesture_pacman_web, install dependencies f
 ```
 $ cd ./gesture_pacman_web
 $ pip install -r requirements.txt
-$ for /f %i in ('python -c "import secrets; print(secrets.token_hex(32))"') do set SECRET_KEY=%i && echo SECRET_KEY=%SECRET_KEY% > .env
+$ cmd.exe /V:ON
+$ for /f %i in ('python -c "import secrets; print(secrets.token_hex(32))"') do (set "SECRET_KEY=%i" && echo SECRET_KEY=!SECRET_KEY! > .env)
 $ python index.py
 ```
